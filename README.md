@@ -2,35 +2,29 @@
 
 ## A Unified Framework
 
-Given multiple input steams (can be 1) $\{X_i \in \mathbb R^{n_i \times T}\}$, the goal is to learn $k$-dimensional outputs $Y \in \mathbb R^{k\times T}$ such that
+Given multiple input steams (or just one) $\{X_i \in \mathbb R^{n_i \times T}\}$, the goal is to learn $k$-dimensional outputs $Y \in \mathbb R^{k\times T}$ such that
 
-$$\max_{Y} \sum_{i} \Phi^\star_i \left(\frac{YX_i^{\top}}{T}\right) - \frac{1}{2}\Psi^\star \left(\frac{YY^{\top}}{T}\right),$$
+$$\max_{Y} \sum_{i} \Phi^\star_i \left(\frac{YX_i^{\top}}{T}\right) - \frac{1}{2}\Psi^\star \left(\frac{YY^{\top}}{T}\right),$$ 
 
-where $\Phi^\star(\cdot)$ and $\Psi^\star(\cdot)$ are Legendre transforms of strictly convex functions $\Phi(\cdot)$ and $\Psi(\cdot)$ (so that the optimal dual variables exist)
+where $\Phi^\star(\cdot), \Psi^\star (\cdot)$ are Legendre transforms of 
+
+strictly convex functions $\Phi(\cdot), \Psi(\cdot)$ (so that the optimal dual variables exist)
 
 $$\Phi^\star(C_{YX}):= \max_{W \in \mathcal D_{W}} \text{Tr}(WC_{YX}^{\top}) - \Phi(W),$$
 
 $$\Psi^\star(C_{YY}):= \max_{M \in \mathcal D_{M}} \text{Tr}(MC_{YY}^{\top}) - \Psi(M).$$
 
-The these functions are non-decreasing when the optimal dual variables $W^*$ and $M^*$ are non-negative. Then, we can interpret the objective as *maximizing the correlation between inputs and outputs, while minimizing the auto-correlation of outputs*.
+The these functions are non-decreasing when the optimal dual variables $W^\star$ and $M^\star$ are non-negative. Then, we can interpret the objective as *maximizing the correlation between inputs and outputs, while minimizing the auto-correlation of outputs*.
 
 #### Neural Network Algorithms
 
 We can use projected gradient descent / ascent to solve a dual problem of the above problem in an online fasion, which leads to a bio-plausible neural network algorithm.
 
-The steady activities of output neurons can be solve by offline projected gradient ascent
-$$Y \leftarrow \text{proj}_{\mathcal D_{\bf Y}}\left[{\bf Y} + \eta_Y\frac{\partial \cdots}{\partial Y}\right] =  \text{proj}_{\mathcal D_{\bf Y}}\left[{\bf Y} + \frac{\eta_Y}{T}(WX - MY)\right],$$
-or via online updates
-$${\bf y}_t \leftarrow \text{proj}_{\mathcal D_{\bf y}}\left[{\bf y} + \eta_y(W{\bf x} - M{\bf y})\right].$$
+The steady activities of output neurons can be solve by offline projected gradient ascent:
 
-The synaptic learning rules are
-$$W\leftarrow \text{proj}_{\mathcal D_W} \left[W + \eta_W \frac{\partial \cdots}{\partial W}\right] = \text{proj}_{\mathcal D_W} \left[W + \eta_W\left( \frac{YX^{\top} }{T}- \Phi'(W)\right)\right];$$
+$${\bf y} \leftarrow \text{proj}\_{\mathcal D_y} \left[{\bf y} + \eta_y(W{\bf x} - M{\bf y})\right].$$
 
-and 
-
-$$M\leftarrow \text{proj}_{\mathcal D_M} \left[M + \eta_M \frac{\partial \cdots}{\partial M}\right] = \text{proj}_{\mathcal D_M} \left[M + \frac{\eta_M}{2}\left( \frac{XX^{\top} }{T}- \Psi'(M)\right)\right].$$
-
-We can also write the synaptic learning rule as the online updates
+The synaptic learning rule:
 
 $$W\leftarrow \text{proj}_{\mathcal D_W} \left[W + \eta_W\left({\bf y}_t{\bf x}_t^{\top}- \Phi'(W)\right)\right],$$
 
