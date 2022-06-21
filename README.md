@@ -53,7 +53,7 @@ where the derivatives `dPhi` and `dPsi` are optional. The algorithm will be more
 When $Y$ is non-negative, and we have two input streams $X_1$ and $X_2$, by setting $$\Phi_i(W_i) = \frac{1}{2}\text{Tr}W_iC_{X_i X_i}W_i^{\top}, i\in \\{1,2\\} \text{  and  } \Psi(M) = \frac{1}{2}\text{Tr}MM^{\top},$$
 we get the *nonnegative cannonical correlation analysis*. We can simply create a NCCA instance with the following code
 ```
-cca = CorrGame(n=[n1, n2], k=top_k, 
+ncca = CorrGame(n=[n1, n2], k=top_k, 
                 Phi=lambda W, X: (W.mm(X.mm(X.t())/X.size(1))*W).sum()/2,
                 Psi=lambda M, X: (M*M).sum()/2,
                 dPhi = lambda W, X:W.mm(X.mm(X.t())/X.size(1)),
@@ -68,5 +68,5 @@ cca = CorrGame(n=[n1, n2], k=top_k,
 
 Please see [`general-correlation-game.ipynb`](https://github.com/RunzheYang/CorrGame/blob/main/general-correlation-game.ipynb) and [`multi-source-correlation-game.ipynb`](https://github.com/RunzheYang/CorrGame/blob/main/multi-source-correlation-game.ipynb) for more examples.
 
-## Reference
+## References
 ...
