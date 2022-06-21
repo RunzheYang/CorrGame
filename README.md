@@ -31,7 +31,7 @@ $$W\leftarrow \text{proj}_{\mathcal D_W} \left[W + \eta_W\left({\bf y}_t{\bf x}_
 $$M\leftarrow \text{proj}_{\mathcal D_M} \left[M + \frac{\eta_M}{2}\left({\bf y}_t{\bf y}_t^{\top}- \Psi'(M)\right)\right].$$
 
 #### Choices of $\Phi$ and $\Psi$
-We can implemented different algorithms from similarity matching famility by specifying different $\Phi$ and $\Psi $, and constraints on $Y$, $W$, and $M$.
+We can implemented different algorithms from similarity matching famility by specifying different $\Phi, \Psi$, and constraints on $Y$, $W$, and $M$.
 For example:
 
 When $W,M,Y$ are unbounded, and $$\Phi(W) = \frac{1}{2}\text{Tr}WW^{\top}, \text{  and  } \Psi(M) = \frac{1}{2}\text{Tr}MM^{\top},$$
