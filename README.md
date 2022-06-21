@@ -66,7 +66,7 @@ cca = CorrGame(n=[n1, n2], k=top_k,
  ```
 
 
-Please see [`general-correlation-game.ipynb`]() and [`multi-source-correlation-game.ipynb`]() for more examples.
+Please see [`general-correlation-game.ipynb`](https://github.com/RunzheYang/CorrGame/blob/main/general-correlation-game.ipynb) and [`multi-source-correlation-game.ipynb`](https://github.com/RunzheYang/CorrGame/blob/main/multi-source-correlation-game.ipynb) for more examples.
 
 ## Reference
 ...
